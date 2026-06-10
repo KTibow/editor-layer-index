@@ -31,10 +31,7 @@ jobs:
       - name: Strict check
         run: |
           python scripts/strict_check.py \
-            sources/asia/ph/PangasinnBulacan-PhilippinesHiRes.geojson \
             sources/north-america/us/fl/Nassau_Ortho_2023.geojson \
-            sources/north-america/us/fl/Osceola_Ortho_2022.geojson \
-            sources/north-america/us/fl/Osceola_Ortho_2023.geojson \
             sources/north-america/us/fl/Saint_Lucie_Ortho_2024.geojson \
             sources/north-america/us/oh/Mercer_OH_2021.geojson \
             sources/north-america/us/oh/Miami_OH_2023.geojson
