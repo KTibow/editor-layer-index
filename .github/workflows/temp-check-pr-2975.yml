@@ -1,0 +1,40 @@
+name: Temp Check PR 2975
+
+on:
+  push:
+    branches:
+      - temp-ci-pr-2975-ad34090
+
+jobs:
+  check:
+    name: Check PR 2975 branch
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout PR branch
+        uses: actions/checkout@v6
+        with:
+          ref: fix-broken-imagery-sources
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.10"
+
+      - name: Install Python dependencies
+        run: |
+          python -m pip install -U pip wheel
+          python -m pip install -r requirements.txt
+
+      - name: Basic check
+        run: find sources -name \*.geojson | xargs python scripts/check.py
+
+      - name: Strict check
+        run: |
+          python scripts/strict_check.py \
+            sources/asia/ph/PangasinnBulacan-PhilippinesHiRes.geojson \
+            sources/north-america/us/fl/Nassau_Ortho_2023.geojson \
+            sources/north-america/us/fl/Osceola_Ortho_2022.geojson \
+            sources/north-america/us/fl/Osceola_Ortho_2023.geojson \
+            sources/north-america/us/fl/Saint_Lucie_Ortho_2024.geojson \
+            sources/north-america/us/oh/Mercer_OH_2021.geojson \
+            sources/north-america/us/oh/Miami_OH_2023.geojson
